@@ -1,0 +1,54 @@
+body{
+    color: brown;
+    background-color: lightgoldenrodyellow;
+    margin: 0;
+    padding: 60px;
+    width: fit-content;
+}
+h1{
+    color: lightgoldenrodyellow;
+    background-color: #001f4d; /* deep blue */
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+h2{
+    background-color: sandybrown; /* sandybrown*/
+    color: brown;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); /*3D border*/
+    width: 80%;
+    margin: 0 auto;
+}
+.section {
+    margin-bottom: 30px;
+    padding-left: 60px; /* aligns h2 and ul nicely */
+}
+ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+input {
+            padding: 5px;
+            border-radius: 6px;
+            margin-top: 5px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); 
+        }
+        button {
+            padding: 5px 10px;
+            border-radius: 6px;
+            background-color: sandybrown;
+            border: none;
+            margin-left: 5px;
+            cursor: pointer;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+ .total {
+            font-weight: bold;
+            margin-top: 10px;
+}
+     

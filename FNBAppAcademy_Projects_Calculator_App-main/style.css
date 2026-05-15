@@ -1,0 +1,68 @@
+table{
+    color: #fff;
+    text-align: center;
+    border-collapse: collapse;
+    font: normal 3em Arial,Helvetica,sans-serif;
+}
+tr{
+    height: 16.02vh;
+    background-color: #4e494d;
+    
+}
+td{
+    width: 25vw;
+    border: 1px solid #4e494d;
+}
+#inputBox{
+    background-color: #b591a6;
+    text-align: right;
+    width: 100%;
+    font-size: 2em;
+    color: #fff;
+    border: 0px;
+}
+.digitButton{
+    background-color: #f089cd;
+}
+.operatorButton{
+    background-color: #e30285;
+}
+.ACButton{
+    background-color: #8f0a63;
+}
+.scientificButton{
+    background-color: #b591a6;
+}
+/* Button style */
+td, .scientificButton {
+    padding: 10px;
+    margin: 5px;
+    background-color: #8f0a63;
+    color: white;
+    border-bottom: 10px;
+    text-align: center;
+    font-size: 0.8em;
+    transition: background-color 0.2s, transform 0.2s;
+    user-select: none;
+
+
+}
+#clap {
+  position: fixed;       /* fixed relative to the viewport */
+  top: 20px;             /* distance from the top */
+  left: 20px;            /* distance from the left edge */
+  font-size: 2.5rem;
+  opacity: 0;
+  pointer-events: none;  /* clicks go through */
+  transition: opacity 0.5s;
+  z-index: 1000;         /* make sure it’s on top */
+}
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
+
+#clap.show {
+  animation: bounce 0.5s ease;
+}
+

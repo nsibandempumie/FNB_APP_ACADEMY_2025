@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css"/>
+    <title>To Do List</title>
+    </head>
+<body>
+    <h1><strong>What's on the List</strong></h1>
+    <br>
+    <br>
+    <div class="section">
+        <h2>FOOD</h2>
+        <ul id="foodList"></ul>
+        <input type="text" id="foodInput" placeholder="Add food item"/>
+        <input type="number" id="foodPrice" placeholder="Price (R)"/>
+        <button onclick="addItem('food')">Add</button>
+        <button onclick="undoItem('food')">Undo</button>
+        <div class="total" id="foodTotal">Total: R0</div>
+    </div>
+        
+    <div class="section">
+        <h2>TOILETRIES</h2>
+        <ul id="toiletriesList"></ul>
+        <input type="text" id="toiletriesInput" placeholder="Add toiletries item"/>
+        <input type="number" id="toiletriesPrice" placeholder="Price (R)"/>
+        <button onclick="addItem('toiletries')">Add</button>
+        <button onclick="undoItem('toiletries')">Undo</button>
+        <div class="total" id="toiletriesTotal">Total: R0</div>
+    </div>
+
+    
+    <div class="section">
+        <h2>CLEANING ITEMS</h2>
+        <ul id="cleaningList"></ul>
+        <input type="text" id="cleaningInput" placeholder="Add cleaning item"/>
+        <input type="number" id="cleaningPrice" placeholder="Price (R)"/>
+        <button onclick="addItem('cleaning')">Add</button>
+        <button onclick="undoItem('cleaning')">Undo</button>
+        <div class="total" id="cleaningTotal">Total: R0</div>
+    </div>
+<script>
+    const itemData = {
+            food: [],
+            toiletries: [],
+            cleaning: []
+        };
+
+        function addItem(category) {
+            const nameInput = document.getElementById(category + "Input");
+            const priceInput = document.getElementById(category + "Price");
+            const list = document.getElementById(category + "List");
+            const totalDisplay = document.getElementById(category + "Total");
+
+            const itemName = nameInput.value.trim();
+            const itemPrice = parseFloat(priceInput.value.trim());
+
+            if (itemName && !isNaN(itemPrice)) {
+                const li = document.createElement("li");
+                li.textContent = `${itemName} – R${itemPrice.toFixed(2)}`;
+                list.appendChild(li);
+
+                itemData[category].push(itemPrice);
+                updateTotal(category);
+
+                nameInput.value = "";
+                priceInput.value = "";
+            }
+        }
+
+        function undoItem(category) {
+            const list = document.getElementById(category + "List");
+            if (list.lastChild) {
+                list.removeChild(list.lastChild);
+                itemData[category].pop();
+                updateTotal(category);
+            }
+        }
+
+        function updateTotal(category) {
+            const total = itemData[category].reduce((sum, price) => sum + price, 0);
+            const totalDisplay = document.getElementById(category + "Total");
+            totalDisplay.textContent = `Total: R${total.toFixed(2)}`;
+        }
+    
+    </script>
+    </body>
+</html>

@@ -1,0 +1,270 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="calculator">
+    <table border="1">
+        
+        <tr>
+        <div id="clap" style="font-size: 2rem; opacity: 0; transition: opacity 0.5s; position: absolute; top: 40px; right: 10px;">
+  👏👏👏
+</div>
+
+        <td colspan="9">
+            <input type="text" id="inputBox" value="0"/>
+            </td>
+        </tr>
+    <tr>
+        <td class="scientificButton" onclick="scientificBtnPressed('pi')">π</td>
+        <td class="scientificButton" onclick="scientificBtnPressed('sinh')">sinh</td>
+        <td class="scientificButton"  onclick="scientificBtnPressed('sin')">sin</td>
+        <td class="scientificButton" onclick="scientificBtnPressed('square')">x²</td>
+        <td class="scientificButton" onclick="scientificBtnPressed('factorial')">n!</td>
+        <td class="digitButton" onclick="digitBtnPressed(7)">7</td>
+        <td class="digitButton" onclick="digitBtnPressed(8)">8</td>
+        <td class="digitButton" onclick="digitBtnPressed(9)">9</td>
+        <td class="operatorButton" onclick="operatorBtnPressed('x')">x</td>
+        </tr>
+        
+        <tr>
+            <td class="scientificButton" onclick="scientificBtnPressed('sqrt')">√</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('cosh')">cosh</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('cos')">cos</td>
+            <td class="scientificButton">xy</td>
+            <td class="scientificButton">y/x</td>
+        <td class="digitButton" onclick="digitBtnPressed(4)">4</td>
+        <td class="digitButton" onclick="digitBtnPressed(5)">5</td>
+        <td class="digitButton" onclick="digitBtnPressed(6)">6</td>
+        <td class="operatorButton" onclick="operatorBtnPressed('-')">-</td>
+        </tr>
+        
+        <tr>
+            <td class="scientificButton">^</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('tanh')">tanh</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('tan')">tan</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('cube')">x³</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('cbrt')">∛</td>
+        <td class="digitButton" onclick="digitBtnPressed(1)">1</td>
+        <td class="digitButton" onclick="digitBtnPressed(2)">2</td>
+        <td class="digitButton" onclick="digitBtnPressed(3)">3</td>
+        <td class="operatorButton" onclick="operatorBtnPressed('+')">+</td>
+        </tr>
+        
+        <tr>
+            <td class="scientificButton" onclick="scientificBtnPressed('exp')">eˣ</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('10^x')">10ˣ</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('1/x')">1/x</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('log')">log</td>
+            <td class="scientificButton" onclick="scientificBtnPressed('negate')">±</td>
+        <td class="digitButton" onclick="digitBtnPressed(0)" colspan="2">0</td>
+            <td class="ACButton" onclick="btnACPressed()">AC</td>
+            <td class="operatorButton" onclick="operatorBtnPressed('/')">/</td>
+        </tr>
+        
+        <tr>
+            <td class="scientificButton" onclick="memoryFunction('MC')">MC</td>
+            <td class="scientificButton" onclick="memoryFunction('MR')">MR</td>
+            <td class="scientificButton" onclick="memoryFunction('MS')">MS</td>
+            <td class="scientificButton" onclick="memoryFunction('M+')">M+</td>
+            <td class="scientificButton" onclick="memoryFunction('M-')">M-</td>
+        <td class="operatorButton" colspan="4"  onclick="equalsBtnPressed()">=</td>
+        </tr>
+    </table>
+    </div>
+    <script>
+        var newLine = true;     //Boolean variable. Determines if the next thing user types should be on a new line
+        var value1;
+        var currentOperator;
+
+        //Event handler for when any digit button is pressed
+      function digitBtnPressed(button){
+          
+          if(newLine){
+              document.getElementById("inputBox").value = button;
+              newLine = false;
+          }else{
+              var currentValue = document.getElementById("inputBox").value;
+          document.getElementById("inputBox").value = currentValue + button;    
+          }
+      }
+        //Event handler when the AC button is pressed
+        function btnACPressed(){
+            document.getElementById("inputBox").value = 0;
+            newLine = true;
+        }
+        
+        //Event handler for operator buttons
+        function operatorBtnPressed(operator){
+            currentOperator = operator;
+            value1 = parseInt(document.getElementById("inputBox").value);
+            newLine = true;
+        }
+        
+        //Event handler for equals to button
+        function equalsBtnPressed(){
+            var value2 = parseInt(document.getElementById("inputBox").value);
+            var finalTotal;
+            
+            switch(currentOperator){
+                case "+":
+                    finalTotal = value1 + value2;
+                    break;
+                case "-":
+                    finalTotal = value1 - value2;
+                    break;
+                case "/":
+                    finalTotal = value1 / value2;
+                    break;
+                case "x":
+                    finalTotal = value1 * value2;
+                    break;
+            }
+        document.getElementById("inputBox").value = finalTotal;  
+            value1 = 0;
+            newLine = true;
+        }
+        
+        function scientificBtnPressed(func) {
+    let input = parseFloat(document.getElementById("inputBox").value);
+    let result;
+
+    switch (func) {
+        case "pi":
+            result = Math.PI;
+            break;
+        case "e":
+            result = Math.E;
+            break;
+        case "sinh":
+            result = Math.sinh(input);
+            break;
+        case "cosh":
+            result = Math.cosh(input);
+            break;
+        case "tanh":
+            result = Math.tanh(input);
+            break;
+        case "sin":
+            result = Math.sin(toRadians(input));
+            break;
+        case "cos":
+            result = Math.cos(toRadians(input));
+            break;
+        case "tan":
+            result = Math.tan(toRadians(input));
+            break;
+        case "square":
+            result = Math.pow(input, 2);
+            break;
+        case "cube":
+            result = Math.pow(input, 3);
+            break;
+        case "cbrt":
+            result = Math.cbrt(input);
+            break;
+        case "sqrt":
+            result = Math.sqrt(input);
+            break;
+        case "exp":
+            result = Math.exp(input); // e^x
+            break;
+        case "10^x":
+            result = Math.pow(10, input);
+            break;
+        case "1/x":
+            result = input === 0 ? "∞" : 1 / input;
+            break;
+        case "log":
+            result = input <= 0 ? "NaN" : Math.log10(input);
+            break;
+        case "ln":
+            result = input <= 0 ? "NaN" : Math.log(input);
+            break;
+        case "factorial":
+            result = factorial(input);
+            break;
+        case "negate":
+            result = -input;
+            break;
+        default:
+            result = input;
+    }
+
+    document.getElementById("inputBox").value = result;
+    newLine = true;
+}
+
+function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+
+function factorial(n) {
+    if (n < 0 || !Number.isInteger(n)) return "NaN";
+    let fact = 1;
+    for (let i = 2; i <= n; i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+        let memoryValue = 0;
+
+function memoryFunction(action) {
+    const inputBox = document.getElementById("inputBox");
+    let currentValue = parseFloat(inputBox.value);
+
+    switch(action) {
+        case "MS": // Store current value to memory
+            memoryValue = currentValue;
+            break;
+        case "MC": // Clear memory
+            memoryValue = 0;
+            break;
+        case "MR": // Recall memory
+            inputBox.value = memoryValue;
+            newLine = true;
+            break;
+        case "M+": // Add current value to memory
+            memoryValue += currentValue;
+            break;
+        case "M-": // Subtract current value from memory
+            memoryValue -= currentValue;
+            break;
+    }
+}
+        function equalsBtnPressed() {
+    var value2 = parseFloat(document.getElementById("inputBox").value);
+    var finalTotal;
+    
+    switch(currentOperator){
+        case "+": finalTotal = value1 + value2; break;
+        case "-": finalTotal = value1 - value2; break;
+        case "/": finalTotal = value1 / value2; break;
+        case "x": finalTotal = value1 * value2; break;
+    }
+    
+    document.getElementById("inputBox").value = finalTotal;
+    
+    var clap = document.getElementById("clap");
+    clap.style.opacity = "1";
+    clap.classList.add("show");
+    
+    setTimeout(() => {
+        clap.style.opacity = "0";
+        clap.classList.remove("show");
+    }, 1000);
+
+    value1 = 0;
+    newLine = true;
+}
+
+
+           
+</script>
+    </body>
+
+
+
+
+</html>
